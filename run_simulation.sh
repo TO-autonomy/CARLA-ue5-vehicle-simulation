@@ -27,14 +27,14 @@ export PYTHONPATH="$PYTHONPATH:$SIMULATOR_PYTHON_API"
 
 
 ## Check if the CARLA simulator is running, if not, start the server
-SERVER_SCRIPT=$SIMULATOR_DIR/CarlaUE4.sh
+SERVER_SCRIPT=$SIMULATOR_DIR/CarlaUnreal.sh
 echo "Checking if the CARLA simulator is running..."
-if ! pgrep -f "CarlaUE4" > /dev/null
+if ! pgrep -f "CarlaUnreal" > /dev/null
 then
     echo "CARLA simulator is not running. Starting server..."
     sh $SERVER_SCRIPT &
-    sleep 5
-    if ! pgrep -f "CarlaUE4" > /dev/null
+    sleep 12  # Wait for the server to start
+    if ! pgrep -f "CarlaUnreal" > /dev/null
     then
         echo "Failed to start CARLA simulator. Exiting..."
         exit 1
@@ -43,26 +43,20 @@ fi
 echo "CARLA simulator is running. Proceeding with the dataset generation."
 
 ## Convert source file to python script and run simulation
-SIMULATION_SCRIPT_IPYNB=$SOURCE_DIR/run_simulation.ipynb
 SIMULATION_SCRIPT_PY=$SOURCE_DIR/run_simulation.py
-jupyter nbconvert \
-    --to script $SIMULATION_SCRIPT_IPYNB --log-level=CRITICAL
 python3 $SIMULATION_SCRIPT_PY \
     --ego_vehicle_extrinsics $SOURCE_DIR/config/carla_extrinsics.urdf \
     --ego_vehicle_intrinsics $SOURCE_DIR/config/carla_intrinsics.json \
-    --episode_config $SOURCE_DIR/config/routes/town03.path.json \
+    --episode_config $SOURCE_DIR/config/routes/mine01.path1.json \
     --output_dir $SOURCE_DIR/generated_data \
     --skip_validation
 
 ## Convert source file to python script and run post processing of simulation data (uncomment commands below to run)
-# POSTPROCESSING_SCRIPT_IPYNB=$SOURCE_DIR/run_simulation_postprocessing.ipynb
-# POSTPROCESSING_SCRIPT_PY=$SOURCE_DIR/run_simulation_postprocessing.py
-# jupyter nbconvert \
-#     --to script $POSTPROCESSING_SCRIPT_IPYNB --log-level=CRITICAL
-# python3 $POSTPROCESSING_SCRIPT_PY \
-#     --ego_vehicle_extrinsics $SOURCE_DIR/config/carla_extrinsics.urdf \
-#     --ego_vehicle_intrinsics $SOURCE_DIR/config/carla_intrinsics.json \
-#     --input_dir $SOURCE_DIR/generated_data \
-#     --output_dir $SOURCE_DIR/processed_data \
-#     --batch_size 20 \
-#     --mode 'debug'
+POSTPROCESSING_SCRIPT_PY=$SOURCE_DIR/run_simulation_postprocessing.py
+python3 $POSTPROCESSING_SCRIPT_PY \
+    --ego_vehicle_extrinsics $SOURCE_DIR/config/carla_extrinsics.urdf \
+    --ego_vehicle_intrinsics $SOURCE_DIR/config/carla_intrinsics.json \
+    --input_dir $SOURCE_DIR/generated_data \
+    --output_dir $SOURCE_DIR/processed_data \
+    --batch_size 20 \
+    --mode 'debug'
