@@ -20,8 +20,8 @@ The CARLA simulation requires server level GPU with requirements exceeding RTX40
 Clone the CARLA vehicle simulation repository and install the necessary dependencies, including a  compiled version of the CARLA simulator (version 0.9.15):
 
 ```bash
-git clone https://github.com/TO-autonomy/CARLA-vehicle-simulation.git
-cd CARLA-vehicle-simulation
+git clone https://github.com/TO-autonomy/CARLA-ue5-vehicle-simulation.git
+cd CARLA-ue5-vehicle-simulation
 sh install.sh
 ```
 
@@ -46,4 +46,5 @@ Simulation data post-processing is disabled by default. To enable it:
 2. Uncomment the relevant lines at the end of the file to activate post-processing.
 
 When data post-processing is enabled, the raw simulation data is processed and exported into a dataset structure. 
+
 
