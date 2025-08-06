@@ -36,7 +36,7 @@ The script should start the CARLA simulator (if it is installed properly using t
 
 During the simulation run, sensor readings are stored in the following directory:
 ```
-.../CARLA-vehicle-simulation/src/generated_data
+CARLA-vehicle-simulation/src/generated_data
 ```
 
 ## Enabling Data Post-Processing
@@ -46,6 +46,7 @@ Simulation data post-processing is disabled by default. To enable it:
 2. Uncomment the relevant lines at the end of the file to activate post-processing.
 
 When data post-processing is enabled, the raw simulation data is processed and exported into a dataset structure. 
+
 
 
 
