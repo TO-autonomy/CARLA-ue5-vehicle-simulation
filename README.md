@@ -4,7 +4,7 @@ This guide provides instructions for setting up and running a vehicle simulation
 
 ## System Requirements
 
-The CARLA simulation was tested with a high-end workstation. However, the recommended system specification for the CARLA simulator should also work for running the vehicle simulation. Lower system requirements could work in a limited capacity, but the simulation's stability and effectiveness are unknown. 
+The simulations were performed on a high-end data processing server. Lower system requirements could work in a limited capacity, but are known to cause stability issues (eg. crashing the simulator due to VRAM issues). 
 
 **NB! The system was developed for Ubuntu 20.04 and Ubuntu 22.04 version. Windows or other OS systems are expected to cause issues during setup or simulation.**
 
@@ -25,7 +25,7 @@ The CARLA simulation was tested with a high-end workstation. However, the recomm
 Clone the CARLA vehicle simulation repository:
 
 ```bash
-git clone https://github.com/TO-autonomy/CARLA-vehicle-simulation.git
+git clone https://github.com/TO-autonomy/CARLA-ue5-vehicle-simulation.git
 cd CARLA-vehicle-simulation
 ```
 
@@ -52,7 +52,7 @@ This command will:
 Sensor data will be saved in:
 
 ```
-.../CARLA-vehicle-simulation/generated_data
+.../CARLA-ue5-vehicle-simulation/generated_data
 ```
 
 ---
@@ -118,6 +118,7 @@ To enable it:
 With visualization enabled, the outputs from the **front cameras** and **LiDAR** are rendered and saved in the specified target folder.
 
 ---
+
 
 
 
