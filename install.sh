@@ -1,5 +1,5 @@
-CARLA_DOWNLOAD_URL="https://tiny.carla.org/carla-0-9-15-linux"
-CARLA_VERSION="0.9.15"
+CARLA_DOWNLOAD_URL="https://tiny.carla.org/carla-0-10-0-linux"
+CARLA_VERSION="0.10.0"
 REQUIRED_PIP_VERSION="24.3.1"
 
 set -e
@@ -15,6 +15,10 @@ else
     echo "Extracting CARLA simulator files..."
     tar -xvzf src/CARLASimulator/CARLA.tar.gz -C src/CARLASimulator
     rm src/CARLASimulator/CARLA.tar.gz
+    # Move extracted files from versioned directory to CARLASimulator
+    mv src/CARLASimulator/Carla-*/* src/CARLASimulator/
+    rmdir src/CARLASimulator/Carla-*
+    echo "CARLA simulator files retrieved and extracted successfully."
 fi 
 echo "CARLA simulator installed successfully."
 
@@ -38,7 +42,16 @@ fi
 echo "========================================"
 
 echo "Installing CARLA Python library (version: $CARLA_VERSION)..."
-pip3 install carla==$CARLA_VERSION
+
+PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
+WHEEL_FILE=$(ls src/CARLASimulator/PythonAPI/carla/dist/carla-$CARLA_VERSION-cp$PYTHON_VERSION-cp$PYTHON_VERSION-linux_x86_64.whl 2>/dev/null | head -n 1)
+
+if [ -z "$WHEEL_FILE" ]; then
+    echo "No compatible CARLA wheel file found for Python $PYTHON_VERSION in src/CARLASimulator/PythonAPI/carla/dist."
+    exit 1
+fi
+
+pip3 install $WHEEL_FILE
 echo "CARLA Python library installed successfully."
 
 echo "========================================"

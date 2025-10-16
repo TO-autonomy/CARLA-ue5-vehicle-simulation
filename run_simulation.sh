@@ -9,7 +9,7 @@ set -e
 CURRENT_DIR=$(pwd)
 SOURCE_DIR=$CURRENT_DIR/src
 SIMULATOR_DIR=$SOURCE_DIR/CARLASimulator
-INPUT_FILE=${1:-$SOURCE_DIR/config/scenarios/town03.scenario1.toml} # Default scenario file if none provided
+INPUT_FILE=${1:-$SOURCE_DIR/config/scenarios/town10.scenario1.toml} # Default scenario file if none provided
 
 # Add CARLA PythonAPI to PYTHONPATH
 export PYTHONPATH="$PYTHONPATH:$SIMULATOR_DIR/PythonAPI/carla"

@@ -92,11 +92,11 @@ with open(SCENARIO_CONFIG_PATH, 'r') as path_file:
     scenario_config_toml = toml.load(path_file)
 
 scenario_map = scenario_config_toml.get("map")
-assert scenario_map in ["Town01", "Town02", "Town03", "Town04", "Town05", "Town06", "Town07", "Town08", "Town09", "Town10HD"], f"Unsupported map: {scenario_map}. Supported maps are Town01 to Town10."
+assert scenario_map in ["Town10HD_Opt", "Mine_01"], f"Unsupported map: {scenario_map}. Supported maps are Town01 to Town10."
 scenario_ego_vehicle_path = scenario_config_toml.get("route")
 assert scenario_ego_vehicle_path is not None and len(scenario_ego_vehicle_path) >= 2, "Route must contain at least two waypoints."
 assert all(len(point) == 3 for point in scenario_ego_vehicle_path), "Each waypoint must be a list of three coordinates [x, y, z]."
-scenario_weather = scenario_config_toml.get("weather", "ClearNoon")
+scenario_weather = scenario_config_toml.get("weather", None)
 scenario_random_seed = scenario_config_toml.get("random_seed", None)
 if scenario_random_seed is not None:
     random.seed(scenario_random_seed)
@@ -545,39 +545,17 @@ if not SKIP_VALIDATION:
 print("Setting up the full simulation environment...")
 reload_world()
 
-# Predefined CARLA weather presets
-weather_presets = {
-    "ClearNoon": carla.WeatherParameters.ClearNoon,
-    "CloudyNoon": carla.WeatherParameters.CloudyNoon,
-    "WetNoon": carla.WeatherParameters.WetNoon,
-    "WetCloudyNoon": carla.WeatherParameters.WetCloudyNoon,
-    "MidRainyNoon": carla.WeatherParameters.MidRainyNoon,
-    "HardRainNoon": carla.WeatherParameters.HardRainNoon,
-    "SoftRainNoon": carla.WeatherParameters.SoftRainNoon,
-    "ClearSunset": carla.WeatherParameters.ClearSunset,
-    "CloudySunset": carla.WeatherParameters.CloudySunset,
-    "WetSunset": carla.WeatherParameters.WetSunset,
-    "WetCloudySunset": carla.WeatherParameters.WetCloudySunset,
-    "MidRainSunset": carla.WeatherParameters.MidRainSunset,
-    "HardRainSunset": carla.WeatherParameters.HardRainSunset,
-    "SoftRainSunset": carla.WeatherParameters.SoftRainSunset
-}
 
 # Check if the specified weather exists
-if scenario_weather in weather_presets:
-    print(f"Setting weather to: {scenario_weather}")
-    world.set_weather(weather_presets[scenario_weather])
-else:
-    print(f"Weather '{scenario_weather}' not found. Using default weather: ClearNoon.")
-    world.set_weather(weather_presets["ClearNoon"])
-print("World weather is set.")
+if scenario_weather is not None:
+    print(f"Current version of CARLA does not support setting weather via scenario file. Skipping weather setting.")
 
 print(f"Spawning ego vehicle and sensors...")
 
 # Spawn ego vehicle
 agent_path = get_agent_path(scenario_ego_vehicle_path)
 
-blueprint_name = "vehicle.dodge.charger_2020"
+blueprint_name = "vehicle.dodge.charger"
 blueprint = blueprint_library.find(blueprint_name)
 blueprint.set_attribute('role_name','ego')
 transform = find_nearest_spawn_point(agent_path[0])

@@ -356,7 +356,7 @@ def get_simulation_parameters():
 
     # Select town from available CARLA towns
     # Reference: https://carla.readthedocs.io/en/0.9.15/core_map/
-    maps = ["Town01", "Town02", "Town03", "Town04", "Town05", "Town10HD"]
+    maps = ["Town10HD_Opt", "Mine_01"]
     print("Available Maps:")
     for i, map in enumerate(maps):
         print(f"{i + 1}. {map}")

@@ -4,7 +4,7 @@
 CURRENT_DIR=$(pwd)
 SOURCE_DIR=$CURRENT_DIR/src
 SIMULATOR_DIR=$SOURCE_DIR/CARLASimulator
-SERVER_SCRIPT="$SIMULATOR_DIR/CarlaUE4.sh"
+SERVER_SCRIPT="$SIMULATOR_DIR/CarlaUnreal.sh"
 SERVER_SCRIPT_BASENAME=$(basename "$SERVER_SCRIPT")
 
 echo "Checking if the CARLA simulator is running..."

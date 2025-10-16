@@ -1,5 +1,5 @@
 # Scenario configuration for CARLA simulation in Town10
-map = "Town10HD"
+map = "Town10HD_Opt"
 
 # Possible weathers: "ClearNoon", "CloudyNoon", "WetNoon", "MidRainyNoon", "HardRainNoon", "SoftRainNoon",
 # "ClearSunset", "CloudySunset", "WetSunset", "MidRainSunset", "HardRainSunset", "SoftRainSunset"
