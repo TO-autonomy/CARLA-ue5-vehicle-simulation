@@ -6,9 +6,9 @@ This guide provides instructions for setting up and running a vehicle simulation
 
 The simulations were performed on a high-end data processing server. Lower system requirements could work in a limited capacity, but are known to cause stability issues (eg. crashing the simulator due to VRAM issues). 
 
-**NB! The system was developed for Ubuntu 20.04 and Ubuntu 22.04 version. Windows or other OS systems are expected to cause issues during setup or simulation.**
+**NB! The system was developed for Ubuntu 20.04 and Ubuntu 22.04 versions. Windows or other OS systems are expected to cause issues during setup or simulation.**
 
-**NB2! The running the default simulation scenario requires server-grade GPU with requirements exceeding RTX4090 VRAM (> 24 GB) capacity.**
+**NB2! Running the default simulation scenario requires a server-grade GPU with requirements exceeding RTX4090 VRAM (> 24 GB) capacity.**
 
 ### Tested System Specification
 - **Operating System:** Ubuntu 22.04.5 LTS
@@ -118,6 +118,7 @@ To enable it:
 With visualization enabled, the outputs from the **front cameras** and **LiDAR** are rendered and saved in the specified target folder.
 
 ---
+
 
 
 
